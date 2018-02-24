@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 23 fév. 2018 à 09:18
--- Version du serveur :  5.7.19
--- Version de PHP :  7.1.9
+-- Client :  127.0.0.1
+-- Généré le :  Sam 24 Février 2018 à 12:14
+-- Version du serveur :  10.1.21-MariaDB
+-- Version de PHP :  5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,9 +26,8 @@ SET time_zone = "+00:00";
 -- Structure de la table `etudiant`
 --
 
-DROP TABLE IF EXISTS `etudiant`;
-CREATE TABLE IF NOT EXISTS `etudiant` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `etudiant` (
+  `id` int(11) NOT NULL,
   `cin` varchar(255) NOT NULL,
   `cne` int(11) NOT NULL,
   `nom_elv` varchar(255) NOT NULL,
@@ -40,14 +37,11 @@ CREATE TABLE IF NOT EXISTS `etudiant` (
   `sexe` varchar(200) NOT NULL,
   `nivetude` text NOT NULL,
   `email` varchar(255) NOT NULL,
-  `motdepasse` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQUE` (`cin`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `motdepasse` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `etudiant`
+-- Contenu de la table `etudiant`
 --
 
 INSERT INTO `etudiant` (`id`, `cin`, `cne`, `nom_elv`, `prenom_elv`, `date_naissance`, `nationalite`, `sexe`, `nivetude`, `email`, `motdepasse`) VALUES
@@ -60,16 +54,14 @@ INSERT INTO `etudiant` (`id`, `cin`, `cne`, `nom_elv`, `prenom_elv`, `date_naiss
 -- Structure de la table `etudiant_groupe`
 --
 
-DROP TABLE IF EXISTS `etudiant_groupe`;
-CREATE TABLE IF NOT EXISTS `etudiant_groupe` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `etudiant_groupe` (
+  `id` int(11) NOT NULL,
   `id_etudiant` int(11) NOT NULL,
-  `id_groupe` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  `id_groupe` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `etudiant_groupe`
+-- Contenu de la table `etudiant_groupe`
 --
 
 INSERT INTO `etudiant_groupe` (`id`, `id_etudiant`, `id_groupe`) VALUES
@@ -82,17 +74,15 @@ INSERT INTO `etudiant_groupe` (`id`, `id_etudiant`, `id_groupe`) VALUES
 -- Structure de la table `groupe`
 --
 
-DROP TABLE IF EXISTS `groupe`;
-CREATE TABLE IF NOT EXISTS `groupe` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `groupe` (
+  `id` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
-  `id_prof` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+  `id_prof` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `groupe`
+-- Contenu de la table `groupe`
 --
 
 INSERT INTO `groupe` (`id`, `nom`, `code`, `id_prof`) VALUES
@@ -107,17 +97,15 @@ INSERT INTO `groupe` (`id`, `nom`, `code`, `id_prof`) VALUES
 -- Structure de la table `groupe_theme`
 --
 
-DROP TABLE IF EXISTS `groupe_theme`;
-CREATE TABLE IF NOT EXISTS `groupe_theme` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `groupe_theme` (
+  `id` int(11) NOT NULL,
   `id_groupe` int(11) NOT NULL,
   `id_theme` int(11) NOT NULL,
-  `status` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+  `status` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `groupe_theme`
+-- Contenu de la table `groupe_theme`
 --
 
 INSERT INTO `groupe_theme` (`id`, `id_groupe`, `id_theme`, `status`) VALUES
@@ -134,25 +122,22 @@ INSERT INTO `groupe_theme` (`id`, `id_groupe`, `id_theme`, `status`) VALUES
 -- Structure de la table `professeur`
 --
 
-DROP TABLE IF EXISTS `professeur`;
-CREATE TABLE IF NOT EXISTS `professeur` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `professeur` (
+  `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `motdepasse` varchar(250) NOT NULL,
   `nom_prof` varchar(255) NOT NULL,
   `prenom_prof` varchar(255) NOT NULL,
-  `responsable_matière` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQUE` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `responsable_matière` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `professeur`
+-- Contenu de la table `professeur`
 --
 
 INSERT INTO `professeur` (`id`, `email`, `motdepasse`, `nom_prof`, `prenom_prof`, `responsable_matière`) VALUES
-(1, 'medi-alami@hotmail.fr', 'mdpmdp', 'Alami', 'Mehdi', 'Programmation Web'),
-(2, 'iraqi@gmail.com', 'mdpmdp', 'Iraqi', 'Mehdi', 'C/C++');
+(1, 'nadir@hotmail.fr', 'mdpmdp', 'Nadir', 'Hajar', 'Programmation Web'),
+(2, 'iraqi@gmail.com', 'mdpmdp', 'Iraqi', 'Rania', 'C/C++');
 
 -- --------------------------------------------------------
 
@@ -160,16 +145,14 @@ INSERT INTO `professeur` (`id`, `email`, `motdepasse`, `nom_prof`, `prenom_prof`
 -- Structure de la table `question`
 --
 
-DROP TABLE IF EXISTS `question`;
-CREATE TABLE IF NOT EXISTS `question` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `question` (
+  `id` int(11) NOT NULL,
   `question` text NOT NULL,
-  `id_theme` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+  `id_theme` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `question`
+-- Contenu de la table `question`
 --
 
 INSERT INTO `question` (`id`, `question`, `id_theme`) VALUES
@@ -198,12 +181,10 @@ INSERT INTO `question` (`id`, `question`, `id_theme`) VALUES
 -- Structure de la table `quizz_passer`
 --
 
-DROP TABLE IF EXISTS `quizz_passer`;
-CREATE TABLE IF NOT EXISTS `quizz_passer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `quizz_passer` (
+  `id` int(11) NOT NULL,
   `id_theme` int(11) NOT NULL,
-  `id_etudiant` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id_etudiant` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -212,17 +193,15 @@ CREATE TABLE IF NOT EXISTS `quizz_passer` (
 -- Structure de la table `reponses`
 --
 
-DROP TABLE IF EXISTS `reponses`;
-CREATE TABLE IF NOT EXISTS `reponses` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `reponses` (
+  `id` int(11) NOT NULL,
   `reponse` text NOT NULL,
   `id_question` int(11) NOT NULL,
-  `correct` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+  `correct` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `reponses`
+-- Contenu de la table `reponses`
 --
 
 INSERT INTO `reponses` (`id`, `reponse`, `id_question`, `correct`) VALUES
@@ -272,13 +251,11 @@ INSERT INTO `reponses` (`id`, `reponse`, `id_question`, `correct`) VALUES
 -- Structure de la table `reponses_etudiant`
 --
 
-DROP TABLE IF EXISTS `reponses_etudiant`;
-CREATE TABLE IF NOT EXISTS `reponses_etudiant` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `reponses_etudiant` (
+  `id` int(11) NOT NULL,
   `id_etudiant` int(11) NOT NULL,
   `id_reponse` int(11) NOT NULL,
-  `id_theme` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id_theme` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -287,13 +264,11 @@ CREATE TABLE IF NOT EXISTS `reponses_etudiant` (
 -- Structure de la table `resultat`
 --
 
-DROP TABLE IF EXISTS `resultat`;
-CREATE TABLE IF NOT EXISTS `resultat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `resultat` (
+  `id` int(11) NOT NULL,
   `id_etudiant` int(11) NOT NULL,
   `id_theme` int(11) NOT NULL,
-  `score` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `score` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -302,16 +277,14 @@ CREATE TABLE IF NOT EXISTS `resultat` (
 -- Structure de la table `theme`
 --
 
-DROP TABLE IF EXISTS `theme`;
-CREATE TABLE IF NOT EXISTS `theme` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `theme` (
+  `id` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
-  `id_prof` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  `id_prof` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `theme`
+-- Contenu de la table `theme`
 --
 
 INSERT INTO `theme` (`id`, `nom`, `id_prof`) VALUES
@@ -319,8 +292,139 @@ INSERT INTO `theme` (`id`, `nom`, `id_prof`) VALUES
 (2, 'Général', 1),
 (3, 'Références et Internet', 1),
 (4, 'Polymorphisme ', 2);
-COMMIT;
 
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQUE` (`cin`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Index pour la table `etudiant_groupe`
+--
+ALTER TABLE `etudiant_groupe`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `groupe`
+--
+ALTER TABLE `groupe`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `groupe_theme`
+--
+ALTER TABLE `groupe_theme`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `professeur`
+--
+ALTER TABLE `professeur`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQUE` (`email`);
+
+--
+-- Index pour la table `question`
+--
+ALTER TABLE `question`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `quizz_passer`
+--
+ALTER TABLE `quizz_passer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `reponses`
+--
+ALTER TABLE `reponses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `reponses_etudiant`
+--
+ALTER TABLE `reponses_etudiant`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `resultat`
+--
+ALTER TABLE `resultat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `theme`
+--
+ALTER TABLE `theme`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `etudiant`
+--
+ALTER TABLE `etudiant`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `etudiant_groupe`
+--
+ALTER TABLE `etudiant_groupe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT pour la table `groupe`
+--
+ALTER TABLE `groupe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT pour la table `groupe_theme`
+--
+ALTER TABLE `groupe_theme`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+--
+-- AUTO_INCREMENT pour la table `professeur`
+--
+ALTER TABLE `professeur`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `question`
+--
+ALTER TABLE `question`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+--
+-- AUTO_INCREMENT pour la table `quizz_passer`
+--
+ALTER TABLE `quizz_passer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `reponses`
+--
+ALTER TABLE `reponses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+--
+-- AUTO_INCREMENT pour la table `reponses_etudiant`
+--
+ALTER TABLE `reponses_etudiant`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `resultat`
+--
+ALTER TABLE `resultat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `theme`
+--
+ALTER TABLE `theme`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
